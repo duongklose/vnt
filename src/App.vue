@@ -1,15 +1,9 @@
 <template>
-  <!-- <div>INDEX</div> -->
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div> -->
-  <!-- <router-view /> -->
   <div v-if="isAuthenticated">
     <div v-if="isAdmin">
       <admin />
     </div>
-    <div v-else>
+    <div v-else >
       <home />
     </div>
   </div>
@@ -37,6 +31,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: #f1f4f6;
+  min-height: 620px;
 }
 
 #nav {

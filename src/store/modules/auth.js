@@ -1,5 +1,4 @@
 import AuthServices from "../../apis/auth"
-// import axios from 'axios'
 
 const state = {
     auth: {

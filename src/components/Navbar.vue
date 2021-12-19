@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg bg-grey">
     <a class="navbar-brand" href="#">
       <img src="../assets/bus-ticket-icon.png" alt="Vinatravel" width="40" height="40">
     </a>
@@ -17,11 +17,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 nav {
   display: flex;
 }
 .mg-auto{
   margin-left: auto;
+}
+.bg-grey{
+  background-color: #fafbfc;
 }
 </style>
