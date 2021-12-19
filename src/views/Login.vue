@@ -4,14 +4,26 @@
       <div class="col-4"></div>
       <div class="col-4">
         <h1 class="mt-50">Đăng nhập</h1>
-        <br>
-        <br>
-        <form>
+        <br />
+        <br />
+        <form @submit.prevent="login({username, password})">
           <div class="form-group">
-            <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập"/>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              placeholder="Tên đăng nhập"
+              v-model="username"
+            />
           </div>
           <div class="form-group">
-            <input type="password" class="form-control" id="pass" placeholder="Mật khẩu"/>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Mật khẩu"
+              v-model='password'
+            />
           </div>
           <button type="submit" class="btn btn-primary">Đăng nhập</button>
         </form>
@@ -22,12 +34,30 @@
 </template>
 
 <script>
-export default {};
+import {mapActions} from 'vuex'
 
+export default {
+  data() {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    ...mapActions(['login'])
+    // login() {
+    //   console.log("Log in function...", this.username, this.password );
+    //   this.$store.dispatch("login", {
+    //     username: this.username,
+    //     password: this.password
+    //   })
+    // }
+  }
+};
 </script>
 
 <style>
-.mt-50{
-    margin-top: 50px;
+.mt-50 {
+  margin-top: 50px
 }
 </style>

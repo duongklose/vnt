@@ -4,12 +4,29 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link>
   </div> -->
-  <router-view />
+  <!-- <router-view /> -->
+  <div v-if="isAuthenticated">
+    <div v-if="isAdmin">
+      <admin />
+    </div>
+    <div v-else>
+      <home />
+    </div>
+  </div>
+  <div v-else>
+    <login />
+  </div>
 </template>
 
 <script>
+import Login from "./views/Login.vue";
+import Home from "./views/Home.vue";
+import { mapGetters } from "vuex";
+import Admin from "./views/Admin.vue";
+
 export default {
-  components: {},
+  components: { Login, Home, Admin },
+  computed: mapGetters(["isAuthenticated", "isAdmin"]),
 };
 </script>
 
