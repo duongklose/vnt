@@ -2,16 +2,22 @@
   <Navbar />
   <div class="side-bar bg-white">
     <div class="sidebar-menu">
-      <div class="sidebar-item">
-        <router-link to="/dashboard">Dashboard</router-link>
-      </div>
-      <div class="sidebar-item">
-        <router-link to="/transportations">Transportation</router-link>
-      </div>
+      <router-link to="/dashboard">
+        <div class="sidebar-item">
+          <i class="bi bi-bar-chart"></i>
+          <p>Dashboard</p>
+        </div>
+      </router-link>
+      <router-link to="/transportations">
+        <div class="sidebar-item">
+          <i class="bi bi-truck"></i>
+          <p>Công ty vận tải</p>
+        </div>
+      </router-link>
     </div>
   </div>
   <div class="content">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -23,7 +29,7 @@ export default {
 </script>
 
 <style scoped>
-.side-bar{
+.side-bar {
   position: fixed;
   width: 280px;
   height: 100vh;
@@ -33,8 +39,19 @@ export default {
 .sidebar-item {
   height: 50px;
   position: relative;
-  display: block;
+  display: flex;
   padding: 0.1rem 0;
+  margin-left: 30px;
+}
+.sidebar-item p {
+  font-size: 20px;
+  margin-bottom: 0;
+  margin-left: 20px;
+  line-height: 45px;
+}
+
+.sidebar-item i {
+  font-size: 30px;
 }
 
 .sidebar-menu {
@@ -42,11 +59,11 @@ export default {
   padding: 0 1.5rem 1.5rem;
   margin-top: 20px;
 }
-.content{
+.content {
   padding-left: 300px;
 }
 
-.bg-white{
+.bg-white {
   background-color: #fff;
 }
 </style>
