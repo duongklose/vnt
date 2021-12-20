@@ -20,7 +20,6 @@ const actions = {
                 password: user.password
             }
             const response = await AuthServices.login(data)
-            console.log('response ', response)
             if(response.status == 200){
                 if(response.data.user.role == 0){
                     commit("ADMIN_LOGIN_SUCCESS")

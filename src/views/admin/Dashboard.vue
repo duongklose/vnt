@@ -13,7 +13,7 @@
             <div class="col-md-7">
               <div class="pt-18">
                 <h5 class="card-title">Người dùng</h5>
-                <p class="number">0</p>
+                <p class="number">{{numOfUser}}</p>
               </div>
             </div>
           </div>
@@ -28,7 +28,7 @@
             <div class="col-md-7">
               <div class="pt-18">
                 <h5 class="card-title">Công ty vận tải</h5>
-                <p class="number">0</p>
+                <p class="number">{{numOfTransportation}}</p>
               </div>
             </div>
           </div>
@@ -54,7 +54,18 @@
 </template>
 
 <script>
-export default {};
+import {mapGetters, mapActions} from 'vuex'
+
+export default {
+  computed: mapGetters(['numOfUser', 'numOfTransportation']),
+  methods:{
+    ...mapActions(['getNumOfUser', 'getNumOfTransportation'])
+  },
+  created(){
+    this.getNumOfUser(),
+    this.getNumOfTransportation()
+  }
+};
 </script>
 
 <style scoped>
