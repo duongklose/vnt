@@ -6,17 +6,20 @@ const state = {
         numOfTransportation: 0,
         ticketThisMonth: 0
     },
+    users:[],
     transportations:[],
     isAddNew: false, 
     phoneIsRegited: false
 }
 
 const getters = {
+    blocked: state => state.blocked,
     numOfUser: state => state.info.numOfUser,
     numOfTransportation: state => state.info.numOfTransportation,
     transportations: state => state.transportations,
     isAddNew: state => state.isAddNew,
-    phoneIsRegited: state => state.phoneIsRegited
+    phoneIsRegited: state => state.phoneIsRegited,
+    users: state => state.users
 }
 
 const actions = {
@@ -31,6 +34,33 @@ const actions = {
                 commit("ADD_TRANSPORTATION", newTransportation)
                 commit("PHONE_IS_NOT_REGISTED")
             }
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
+    async blockUser({commit}, phone){
+        try {
+            const response = await AdminServices.blockUser(phone)
+            console.log(response)
+            commit("DO_NOTHING")
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
+    async deleteTransportation({commit}, phone){
+        try {
+            const response = await AdminServices.deleteTransportation(phone)
+            console.log(response)
+            commit("DELETE_TRANSPORTATIONS", phone)
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
+    async deleteUser({commit}, phone){
+        try {
+            const response = await AdminServices.deleteUser(phone)
+            console.log(response)
+            commit("DELETE_USERS", phone)
         } catch (error) {
             console.log(error.response)
         }
@@ -59,15 +89,23 @@ const actions = {
             console.log(error.response)
         }
     },
-    async deleteTransportation({commit}, phone){
+    async getUsers({commit}){
         try {
-            const response = await AdminServices.deleteTransportation(phone)
-            console.log(response)
-            commit("DELETE_TRANSPORTATIONS", phone)
+            const response = await AdminServices.getUsers()
+            commit("SET_USERS", response.data.users)
         } catch (error) {
             console.log(error.response)
         }
-    }
+    },
+    async unblockUser({commit}, phone){
+        try {
+            const response = await AdminServices.unblockUser(phone)
+            console.log(response)
+            commit("DO_NOTHING")
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
 }
 
 const mutations = {
@@ -77,6 +115,12 @@ const mutations = {
     DELETE_TRANSPORTATIONS(state, phone){
         state.transportations = state.transportations.filter(transportation => transportation.phone !== phone)
     },
+    DELETE_USERS(state, phone){
+        state.users = state.users.filter(user => user.phone !== phone)
+    },
+    DO_NOTHING(){
+        
+    },
     SET_NUM_OF_USER(state, numOfUser){
         state.info.numOfUser = numOfUser
     },
@@ -85,6 +129,9 @@ const mutations = {
     },
     SET_TRANSPORTATIONS(state, data){
         state.transportations = data
+    },
+    SET_USERS(state, data){
+        state.users = data
     },
     TOGGLE_ISADDNEW(state){
         state.isAddNew = !state.isAddNew

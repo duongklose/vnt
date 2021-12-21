@@ -8,6 +8,12 @@
           <p>Dashboard</p>
         </div>
       </router-link>
+      <router-link to="/users">
+        <div class="sidebar-item">
+          <i class="bi bi-person-rolodex"></i>
+          <p>Quản lý người dùng</p>
+        </div>
+      </router-link>
       <router-link to="/transportations">
         <div class="sidebar-item">
           <i class="bi bi-truck"></i>
@@ -41,23 +47,30 @@ export default {
   position: relative;
   display: flex;
   padding: 0.1rem 0;
-  margin-left: 30px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  border-radius: 3px;
 }
 .sidebar-item p {
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 0;
   margin-left: 20px;
   line-height: 45px;
 }
 
 .sidebar-item i {
+  padding-left: 20px;
   font-size: 30px;
+}
+
+.sidebar-item:hover{
+  background-color: #eafff4;
 }
 
 .sidebar-menu {
   width: auto !important;
-  padding: 0 1.5rem 1.5rem;
-  margin-top: 20px;
+  padding-right: 1rem;
+  margin-top: 40px;
 }
 .content {
   padding-left: 300px;
