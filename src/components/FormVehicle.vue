@@ -1,22 +1,28 @@
 <template>
   <form @submit="onSubmit">
-    <h3>Thêm công ty vận tải mới</h3>
-    <div v-if="phoneIsRegited" class="alert alert-danger" role="alert">
-      Số điện thoại này đã được đăng ký.
+    <h3>Thêm xe mới</h3>
+    <div v-if="failed != ''" class="alert alert-danger" role="alert">
+      {{failed}}
     </div>
     <div class="form-group field">
-      <label for="name">Tên công ty vận tải</label>
+      <label for="type">Loại xe</label>
+      <select class="form-control" v-model="type" required>
+        <option v-for="type in vehicle_type" :key="type.id">{{type.name}}</option>
+      </select>
+    </div>
+    <div class="form-group field">
+      <label for="license_plate">Biển số xe</label>
       <input
         type="text"
         class="form-control"
-        id="name"
-        placeholder="Tên công ty vận tải"
-        v-model="name"
+        id="license_plate"
+        placeholder="29A-0000"
+        v-model="license_plate"
         required
       />
     </div>
     <div class="form-group field">
-      <label for="phone">Số điện thoại</label>
+      <label for="phone">Số điện thoại xe</label>
       <input
         type="text"
         class="form-control"
@@ -27,19 +33,9 @@
       />
     </div>
     <div class="form-group field">
-      <label for="description">Mô tả</label>
-      <textarea
-        class="form-control"
-        id="description"
-        rows="3"
-        v-model="description"
-      ></textarea>
-    </div>
-    <div class="form-group field">
       <div class="group-button">
         <button type="submit" class="btn btn-primary mr-30">Thêm</button>
         <button
-          type="submit"
           class="btn btn-outline-danger"
           @click="TOGGLE_ISADDNEW"
         >
@@ -52,30 +48,31 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
-
 export default {
   data() {
     return {
-      name: "",
+      type: "",
       phone: "",
-      description: "",
+      license_plate: "",
     };
   },
-
-  computed: mapGetters(["phoneIsRegited"]),
+  
+  computed: mapGetters(["id", "failed", "vehicles", "vehicle_type", "id_transportation"]),
   methods: {
-    ...mapActions(["addTransportation"]),
-    ...mapMutations(["TOGGLE_ISADDNEW"]),
+    
+    ...mapMutations(["SET_ALL_VEHICLE_TYPE"]),
+    ...mapActions(["addVehicle"]),
     onSubmit(event) {
       event.preventDefault();
-      this.addTransportation({
-        name: this.name,
+      this.addVehicle({
+        type: this.type,
         phone: this.phone,
-        description: this.description,
+        license_plate: this.license_plate,
+        id_transportation: this.id_transportation
       });
-      this.name = "";
+      this.type = "";
       this.phone = "";
-      this.description = "";
+      this.license_plate = "";
     },
   },
 };

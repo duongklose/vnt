@@ -2,19 +2,19 @@
   <Navbar />
   <div class="side-bar bg-white">
     <div class="sidebar-menu">
-      <router-link to="/dashboard">
+      <router-link to="/admin/dashboard">
         <div class="sidebar-item">
           <i class="bi bi-bar-chart"></i>
           <p>Dashboard</p>
         </div>
       </router-link>
-      <router-link to="/users">
+      <router-link to="/admin/manage_users">
         <div class="sidebar-item">
           <i class="bi bi-person-rolodex"></i>
           <p>Quản lý người dùng</p>
         </div>
       </router-link>
-      <router-link to="/transportations">
+      <router-link to="/admin/manage_transportations">
         <div class="sidebar-item">
           <i class="bi bi-truck"></i>
           <p>Công ty vận tải</p>
@@ -39,8 +39,8 @@ export default {
   position: fixed;
   width: 280px;
   height: 100vh;
-  background-color: darkslategrey;
   text-align: left;
+  margin-top: 56px;
 }
 .sidebar-item {
   height: 50px;

@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
-import DashboardAdmin from "../views/admin/Dashboard.vue"
+import DashboardAdmin from "../views/admin/DashboardAdmin.vue"
 import Transportation from "../views/admin/Transportations.vue"
 import User from "../views/admin/Users.vue"
+import Dashboard from "../views/home/Dashboard.vue"
+import Vehicle from "../views/home/Vehicles.vue"
 
 const routes = [
   {
@@ -12,22 +14,27 @@ const routes = [
     component: Home
   },
   {
+    path: "/vehicles",
+    name: "Vehicle",
+    component: Vehicle
+  },
+  {
     path: "/admin",
     name: "Admin",
     component: DashboardAdmin
   },
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
     name: "Dashboard",
     component: DashboardAdmin
   },
   {
-    path: "/transportations",
+    path: "/admin/manage_transportations",
     name: "Transportation",
     component: Transportation
   },
   {
-    path: "/users",
+    path: "/admin/manage_users",
     name: "User",
     component: User
   },
@@ -47,6 +54,11 @@ const routes = [
   //     }
   //   ]
   // },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard
+  },
   {
     path: "/login",
     name: "Login",

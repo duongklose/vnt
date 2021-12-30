@@ -1,4 +1,5 @@
 import AdminServices from '../../apis/admin'
+// import HomeServices from '../../apis/home'
 
 const state = {
     info:{
@@ -106,6 +107,7 @@ const actions = {
             console.log(error.response)
         }
     },
+
 }
 
 const mutations = {
