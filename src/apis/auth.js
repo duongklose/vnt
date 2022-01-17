@@ -6,5 +6,8 @@ export default {
     },
     addAdmin(){
         return Api().post('users/addAdmin')
+    },
+    checkLoggedIn(access_token){
+        return Api().get('users/checkLoggedIn', {headers: {token: access_token}})
     }
 };

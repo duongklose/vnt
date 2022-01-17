@@ -6,18 +6,35 @@ import Transportation from "../views/admin/Transportations.vue"
 import User from "../views/admin/Users.vue"
 import Dashboard from "../views/home/Dashboard.vue"
 import Vehicle from "../views/home/Vehicles.vue"
+import Trip from "../views/home/Trips.vue"
 
 const routes = [
+  //================================================================
+  //Route for home
+  //================================================================
   {
     path: "/home",
     name: "Home",
     component: Home
   },
   {
+    path: "/dashboard",
+    name: "Dashboard",
+    component: Dashboard
+  },
+  {
     path: "/vehicles",
     name: "Vehicle",
     component: Vehicle
   },
+  {
+    path: "/trips",
+    name: "Trip",
+    component: Trip
+  },
+  //================================================================
+  //Route for admin
+  //================================================================
   {
     path: "/admin",
     name: "Admin",
@@ -54,11 +71,6 @@ const routes = [
   //     }
   //   ]
   // },
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    component: Dashboard
-  },
   {
     path: "/login",
     name: "Login",

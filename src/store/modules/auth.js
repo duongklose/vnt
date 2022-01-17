@@ -22,20 +22,42 @@ const actions = {
                 password: user.password
             }
             const response = await AuthServices.login(data)
-            if(response.status == 200){
-                if(response.data.user.role == 0){
+            if (response.status == 200 && response.data.token) {
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                localStorage.setItem('token', JSON.stringify(response.data.token));
+                if (response.data.user.role == 0) {
                     commit("ADMIN_LOGIN_SUCCESS")
                 }
-                else if(response.data.user.role == 1){
+                else if (response.data.user.role == 1) {
                     commit("SET_ID_TRANSPORTATION", response.data.user.id_transportation)
                     commit("TRANSPORTATION_LOGIN_SUCCESS")
-                } 
+                }
             }
         } catch (error) {
             console.log(error.response)
         }
     },
+    async checkLoggedIn({ commit }) {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('token ', token)
+            const response = await AuthServices.checkLoggedIn(token)
+            console.log('response ', response)
+            if (response.status == 200) {
+                if (JSON.parse(localStorage.getItem('user')).role == 0) {
+                    commit("ADMIN_LOGIN_SUCCESS")
+                } else {
+                    // commit("SET_ID_TRANSPORTATION", response.data.user.id_transportation)
+                    commit("TRANSPORTATION_LOGIN_SUCCESS")
+                }
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    },
     logout({ commit }) {
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
         commit("LOGOUT")
     }
 }
@@ -49,7 +71,7 @@ const mutations = {
         state.auth.isAuthenticated = true
         state.auth.isAdmin = true
     },
-    LOGOUT(state){
+    LOGOUT(state) {
         state.auth.isAuthenticated = false
     },
     SET_ID_TRANSPORTATION(state, id) {

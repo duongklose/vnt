@@ -8,16 +8,16 @@
           <p>Dashboard</p>
         </div>
       </router-link>
-      <!-- <router-link to="/transportations">
-        <div class="sidebar-item">
-          <i class="bi bi-ticket-perforated"></i>
-          <p>Quản lý chuyến đi</p>
-        </div>
-      </router-link> -->
       <router-link to="/vehicles">
         <div class="sidebar-item">
           <i class="bi bi-truck"></i>
           <p>Quản lý xe</p>
+        </div>
+      </router-link>
+      <router-link to="/trips">
+        <div class="sidebar-item">
+          <i class="bi bi-ticket-perforated"></i>
+          <p>Quản lý chuyến đi</p>
         </div>
       </router-link>
     </div>
@@ -29,8 +29,21 @@
 
 <script>
 import Navbar from "../components/Navbar.vue";
+// import { useCookies } from "vue3-cookies";
+// import routes from "../router"
+
 export default {
   components: { Navbar },
+  // setup() {
+  //   const { cookies } = useCookies();
+  //   const route = routes();
+  //   return { cookies, route };
+  // },
+  // beforeCreate: function () {
+  //   if (!this.$cookies.exists()) {
+  //     this.$route.push('/home')
+  //   }
+  // },
 };
 </script>
 

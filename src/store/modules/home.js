@@ -2,24 +2,26 @@ import HomeServices from '../../apis/home'
 
 const state = {
     failed: "",
+    trips: [],
     vehicles: [],
     vehicle_type: []
 }
 
 const getters = {
-    vehicles: state => state.vehicles,
     failed: state => state.failed,
+    trips: state => state.trips,
+    vehicles: state => state.vehicles,
     vehicle_type: state => state.vehicle_type
 }
 
 const actions = {
-    async addVehicle({commit}, newVehicle) {
+    async addVehicle({ commit }, newVehicle) {
         try {
             const response = await HomeServices.addVehicle(newVehicle)
-            console.log('response ' , response)
-            if(response.status == 200){
+            console.log('response ', response)
+            if (response.status == 200) {
                 commit("SET_FAILED", response.data.error.message)
-            }else{
+            } else {
                 commit("ADD_VEHICLE", newVehicle)
                 commit("SET_FAILED", '')
             }
@@ -27,7 +29,7 @@ const actions = {
             console.log(error.response)
         }
     },
-    async deleteVehicles({commit}, phone){
+    async deleteVehicles({ commit }, phone) {
         try {
             const response = await HomeServices.deleteVehicle(phone)
             console.log(response)
@@ -36,7 +38,7 @@ const actions = {
             console.log(error.response)
         }
     },
-    async getAllVehicleType({commit}) {
+    async getAllVehicleType({ commit }) {
         try {
             const response = await HomeServices.getAllVehicleType()
             commit("SET_ALL_VEHICLE_TYPE", response.data.vehicle_type)
@@ -44,10 +46,18 @@ const actions = {
             console.log(error.response)
         }
     },
-    async getTransportationVehicles({commit}, idTransportation) {
+    async getTransportationTrips({ commit }, idTransportation) {
+        try {
+            const response = await HomeServices.getTransportationTrips(idTransportation)
+            console.log('response ', response.data.trips)
+            commit("SET_TRIPS", response.data.trips)
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
+    async getTransportationVehicles({ commit }, idTransportation) {
         try {
             const response = await HomeServices.getTransportationVehicles(idTransportation)
-            console.log('response ' , response.data.vehicles)
             commit("SET_VEHICLES", response.data.vehicles)
         } catch (error) {
             console.log(error.response)
@@ -56,22 +66,31 @@ const actions = {
 }
 
 const mutations = {
-    ADD_VEHICLE(state, vehicle){
+    ADD_VEHICLE(state, vehicle) {
         state.vehicles.push(vehicle)
     },
-    DELETE_VEHICLE(state, phone){
+    DELETE_VEHICLE(state, phone) {
         state.vehicles = state.vehicles.filter(vehicle => vehicle.phone !== phone)
     },
-    SET_FAILED(state, message){
+    SET_FAILED(state, message) {
         state.failed = message
     },
-    SET_ALL_VEHICLE_TYPE(state, types){
-        for(var i=0; i<types.length ; i++){
+    SET_ALL_VEHICLE_TYPE(state, types) {
+        for (var i = 0; i < types.length; i++) {
             state.vehicle_type.push(types[i])
-            console.log('res ', state.vehicle_type)
         }
     },
-    SET_VEHICLES(state, data){
+    SET_TRIPS(state, data) {
+        //xu ly dinh dang ngay thang
+        for (var i = 0; i < data.length; i++) {
+            var time = data[i].start_time.split(/[-T:.]/)
+            data[i].start_time = time[3] + ":" + time[4] + " " + time[2] + "/" + time[1] + "/" + time[0]; 
+            time = data[i].end_time.split(/[-T:.]/)
+            data[i].end_time = time[3] + ":" + time[4] + " " + time[2] + "/" + time[1] + "/" + time[0]; 
+        }
+        state.trips = data
+    },
+    SET_VEHICLES(state, data) {
         state.vehicles = data
     }
 }

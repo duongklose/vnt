@@ -10,6 +10,9 @@ export default {
     getAllVehicleType(){
         return Api().get('/getAllVehicleType')
     },
+    getTransportationTrips(idTransportation){
+        return Api().get('/getTransportationTrips?idTransportation='+ idTransportation)
+    },
     getTransportationVehicles(idTransportation){
         return Api().get('/getTransportationVehicles?idTransportation='+ idTransportation)
     }

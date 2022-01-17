@@ -15,12 +15,18 @@
 <script>
 import Login from "./views/Login.vue";
 import Home from "./views/Home.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import Admin from "./views/Admin.vue";
 
 export default {
   components: { Login, Home, Admin },
   computed: mapGetters(["isAuthenticated", "isAdmin"]),
+  methods:{
+    ...mapActions(["checkLoggedIn"])
+  },
+  created(){
+    this.checkLoggedIn()
+  }
 };
 </script>
 
