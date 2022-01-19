@@ -1,6 +1,6 @@
 <template>
   <form @submit="onSubmit">
-    <h3>Thêm công ty chuyến đi mới</h3>
+    <h3>Thêm chuyến đi mới</h3>
     <!-- <div v-if="phoneIsRegited" class="alert alert-danger" role="alert">
       Số điện thoại này đã được đăng ký.
     </div> -->

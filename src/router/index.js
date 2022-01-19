@@ -7,6 +7,7 @@ import User from "../views/admin/Users.vue"
 import Dashboard from "../views/home/Dashboard.vue"
 import Vehicle from "../views/home/Vehicles.vue"
 import Trip from "../views/home/Trips.vue"
+import NewTrip from "../views/home/NewTrip.vue"
 
 const routes = [
   //================================================================
@@ -31,6 +32,11 @@ const routes = [
     path: "/trips",
     name: "Trip",
     component: Trip
+  },
+  {
+    path: "/newtrip",
+    name: "NewTrip",
+    component: NewTrip
   },
   //================================================================
   //Route for admin

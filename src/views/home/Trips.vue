@@ -5,7 +5,7 @@
       <div v-if="isAddNew">
         <FormTrip />
       </div>
-      <button v-else class="btn btn-primary" @click="TOGGLE_ISADDNEW">
+      <button v-else class="btn btn-primary" @click="gotoNewTrip">
         Thêm mới
       </button>
       <h2 v-if="isAddNew">Danh sách chuyến đi sắp tới</h2>
@@ -49,6 +49,7 @@
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
 import FormTrip from "../../components/FormTrip.vue";
+
 export default {
   components: {
     FormTrip,
@@ -60,6 +61,9 @@ export default {
   methods: {
     ...mapMutations(["TOGGLE_ISADDNEW"]),
     ...mapActions(["getTransportationTrips"]),
+    gotoNewTrip(){
+      this.$router.push("NewTrip")
+    }
   },
 };
 </script>
