@@ -12,10 +12,13 @@
     "bootstrap-icons": "^1.7.2",
     "core-js": "^3.6.5",
     "dateformat": "^5.0.2",
+    "moment": "^2.29.1",
     "vue": "^3.0.0",
+    "vue-bootstrap-datetimepicker": "^5.0.1",
     "vue-router": "^4.0.0-0",
     "vue3-cookies": "^1.0.6",
     "vue3-date-time-picker": "^2.4.4",
+    "vuejs-datetimepicker": "^1.1.13",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

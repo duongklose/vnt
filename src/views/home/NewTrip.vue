@@ -20,7 +20,11 @@
       <div class="form-group field">
         <label for="end_province">Nơi đến</label>
         <select class="form-control" v-model="end_province" required>
-          <option v-for="province in provinces" :key="province.id" :value="province.id">
+          <option
+            v-for="province in provinces"
+            :key="province.id"
+            :value="province.id"
+          >
             {{ province.name }}
           </option>
         </select>
@@ -28,7 +32,7 @@
       <div class="form-group field">
         <label for="start_location">Điểm đón chính</label>
         <select class="form-control" v-model="start_station" required>
-          <option v-for="station in start_stations" :key="station.id">
+          <option v-for="station in start_stations" :key="station.id" :value="station.id">
             {{ station.name }}
           </option>
         </select>
@@ -36,23 +40,31 @@
       <div class="form-group field">
         <label for="end_location">Điểm trả chính</label>
         <select class="form-control" v-model="end_station" required>
-          <option v-for="station in end_stations" :key="station.id">
+          <option v-for="station in end_stations" :key="station.id" :value="station.id">
             {{ station.name }}
           </option>
         </select>
       </div>
       <div class="form-group field">
         <label for="start_time">Ngày giờ xuất phát</label>
-        <div style="margin-left: -67px;"><Datepicker v-model="start_time" required /></div>
+        <div style="margin-left: -67px">
+          <Datepicker v-model="start_time" :format="format" />
+        </div>
       </div>
       <div class="form-group field">
         <label for="end_time">Ngày giờ đến dự kiến</label>
-        <div style="margin-left: -67px;"><Datepicker v-model="end_time" required /></div>
+        <div style="margin-left: -67px">
+          <Datepicker v-model="end_time" :format="format" />
+        </div>
       </div>
       <div class="form-group field">
         <label for="vehicle">Xe</label>
         <select class="form-control" v-model="vehicle" required>
-          <option v-for="vehicle in vehicles" :key="vehicle.id">
+          <option
+            v-for="vehicle in vehicles"
+            :key="vehicle.id"
+            :value="vehicle.id"
+          >
             {{ vehicle.license_plate + " - " + vehicle.type }}
           </option>
         </select>
@@ -79,25 +91,60 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import { ref } from 'vue';
 import Datepicker from 'vue3-date-time-picker';
-import 'vue3-date-time-picker/dist/main.css';
+import 'vue3-date-time-picker/dist/main.css'
+import moment from 'moment';
 
 export default {
-    components: { Datepicker },
+  components: { Datepicker },
+  setup() {
+        const date = ref(new Date());
+        const format = (date) => {
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+            const year = date.getFullYear();
+            const hour = date.getHours();
+            const minute = date.getMinutes();
+            var d = day;
+            var m = month;
+            var h = hour;
+            var min = minute;
+            if(day<10){
+              d = "0" + day;
+            }
+            if(month<10){
+              m = "0" + month;
+            }
+            if(hour<10){
+              h = "0" + hour;
+            }
+            if(minute<10){
+              min = "0" + minute;
+            }
+            
+            return `${d}/${m}/${year} ${h}:${min}`;
+        }
+        
+        return {
+            date,
+            format,
+        }
+    },
   data() {
     return {
       start_province: "",
       end_province: "",
       start_station: "",
       end_station: "",
-      start_time: null,
-      end_time: null,
+      start_time: "",
+      end_time: "",
       vehicle: "",
       price: "",
     };
   },
   created() {
-    this.getAllVehicle(this.id_transportation);
+    this.getAllVehicle(JSON.parse(localStorage.getItem('user')).id_transportation);
     this.getAllProvince();
   },
   computed: mapGetters([
@@ -107,7 +154,7 @@ export default {
     "id_transportation",
     "provinces",
     "start_stations",
-    "end_stations"
+    "end_stations",
   ]),
   watch: {
     start_province() {
@@ -124,17 +171,27 @@ export default {
       "getAllProvince",
       "getStartStations",
       "getEndStations",
+      "addTrip",
     ]),
     onSubmit(event) {
       event.preventDefault();
-      console.log("start time", this.start_time)
-      //   this.addVehicle({
-      //     type: this.type,
-      //     phone: this.phone,
-      //     license_plate: this.license_plate,
-      //     id_transportation: this.id_transportation
+      // console.log("new trip", {
+      //     id_coach: this.vehicle,
+      //     price: parseInt(this.price),
+      //     start_time: moment.utc(this.start_time).local().format('YYYY-MM-DD HH:mm:ss'),
+      //     end_time: moment.utc(this.end_time).local().format('YYYY-MM-DD HH:mm:ss'),
+      //     id_start_station: this.start_station,
+      //     id_end_station: this.end_station
       //   });
-    //     (this.vehicle = ""),
+        this.addTrip({
+          id_coach: this.vehicle,
+          price: parseInt(this.price),
+          start_time: moment.utc(this.start_time).local().format('YYYY-MM-DD HH:mm:ss'),
+          end_time: moment.utc(this.end_time).local().format('YYYY-MM-DD HH:mm:ss'),
+          id_start_station: this.start_station,
+          id_end_station: this.end_station
+        });
+        this.vehicle = "";
     },
   },
 };

@@ -34,6 +34,9 @@ import Navbar from "../components/Navbar.vue";
 
 export default {
   components: { Navbar },
+  created(){
+    
+  }
   // setup() {
   //   const { cookies } = useCookies();
   //   const route = routes();

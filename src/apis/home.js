@@ -1,6 +1,10 @@
 import Api from './index'
 
 export default {
+    addTrip(newTrip){
+        console.log("newtrip", newTrip)
+        return Api().post('addTrip', newTrip)
+    },
     addVehicle(newVehicle){
         return Api().post('addVehicle', newVehicle)
     },

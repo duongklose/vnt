@@ -21,6 +21,19 @@ const getters = {
 }
 
 const actions = {
+    async addTrip({ commit }, newTrip) {
+        try {
+            const response = await HomeServices.addTrip(newTrip)
+            console.log('response ', response)
+            if (response.status == 200) {
+                commit("SET_FAILED", response.data.error.message)
+            } else {
+                commit("ADD_TRIP", newTrip)
+            }
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
     async addVehicle({ commit }, newVehicle) {
         try {
             const response = await HomeServices.addVehicle(newVehicle)
@@ -106,6 +119,9 @@ const actions = {
 }
 
 const mutations = {
+    ADD_TRIP(state, trip) {
+        state.trips.push(trip)
+    },
     ADD_VEHICLE(state, vehicle) {
         state.vehicles.push(vehicle)
     },
