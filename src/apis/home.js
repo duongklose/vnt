@@ -44,6 +44,9 @@ export default {
     getTransportation(idTransportation){
         return Api().get('/getTransportation?idTransportation='+ idTransportation)
     },
+    mergeTrip(list_merge_trip){
+        return Api().post('/mergeTrip', {list: JSON.stringify(list_merge_trip)})
+    },
     returnComment(comment){
         return Api().post('/returnComment', comment)
     },

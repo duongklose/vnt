@@ -11,7 +11,8 @@ const state = {
     start_stations: [],
     end_stations: [],
     reviews: [],
-    transportation: {}
+    transportation: {},
+    list_merge_trip: []
 }
 
 const getters = {
@@ -25,7 +26,8 @@ const getters = {
     start_stations: state => state.start_stations,
     end_stations: state => state.end_stations,
     reviews: state => state.reviews,
-    transportation: state => state.transportation
+    transportation: state => state.transportation,
+    list_merge_trip: state => state.list_merge_trip
 }
 
 const actions = {
@@ -166,6 +168,14 @@ const actions = {
             console.log(error.response)
         }
     },
+    async mergeTrip() {
+        try {
+            const response = await HomeServices.mergeTrip(state.list_merge_trip)
+            console.log("res", response)
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
     async returnComment({ commit }, comment) {
         if (comment.comment == "") {
             return;
@@ -198,11 +208,27 @@ const mutations = {
     ADD_TRIP(state, trip) {
         state.trips.push(trip)
     },
+    ADD_MERGE_TRIP(state, id){
+        state.list_merge_trip.push({id: id})
+        console.log("list", state.list_merge_trip)
+    },
     ADD_VEHICLE(state, vehicle) {
         state.vehicles.push(vehicle)
     },
+    CLEAR_LIST_MERGE_TRIP(){
+        state.list_merge_trip.length = 0
+    },
     DELETE_VEHICLE(state, phone) {
         state.vehicles = state.vehicles.filter(vehicle => vehicle.phone !== phone)
+    },
+    REMOVE_MERGE_TRIP(state, id){
+        for( var i = 0; i < state.list_merge_trip.length; i++){ 
+            if ( state.list_merge_trip[i] === id) { 
+                state.list_merge_trip.splice(i, 1)
+                break
+            }
+        }
+        console.log("list", state.list_merge_trip)
     },
     SET_FAILED(state, message) {
         state.failed = message

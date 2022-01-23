@@ -3,6 +3,7 @@
     <div class="table-list">
       <h2>Danh sách chuyến đi sắp tới</h2>
       <button class="btn btn-primary" @click="gotoNewTrip">Thêm mới</button>
+      <button class="btn btn-success mleft-20" @click="mergeTrip">Ghép chuyến đi</button>
       <table class="table table-hover mt-20">
         <thead>
           <tr>
@@ -86,6 +87,9 @@ export default {
         this.getTripByID(idTrip);
         this.$router.push("DetailTrip");
     },
+    mergeTrip() {
+      this.$router.push("MergeTrip");
+    },
   },
 };
 </script>
@@ -116,6 +120,9 @@ h2 {
 
 .mt-20 {
   margin-top: 20px;
+}
+.mleft-20{
+  margin-left: 20px;
 }
 .action-button {
   width: 65px;

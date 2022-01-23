@@ -27,7 +27,7 @@
       />
     </div>
     <div class="form-group field">
-      <label for="description">Mô tả</label>
+      <label for="description">Slogan / Mô tả</label>
       <textarea
         class="form-control"
         id="description"
@@ -37,7 +37,7 @@
     </div>
     <div class="form-group field">
       <label for="logo">Logo</label>
-      <input type="file" name="upfile" @change="uploadImage($event)" required/>
+      <input class="w-100" type="file" name="upfile" @change="uploadImage($event)" required/>
     </div>
     <div class="form-group field">
       <div class="group-button">
@@ -64,7 +64,7 @@ export default {
       name: "",
       phone: "",
       description: "",
-      logo: null,
+      logo: "",
     };
   },
 
@@ -78,6 +78,7 @@ export default {
         name: this.name,
         phone: this.phone,
         description: this.description,
+        logo: this.logo
       });
       this.name = "";
       this.phone = "";
@@ -86,12 +87,13 @@ export default {
     async uploadImage(e) {
       let upfile = new FormData();
       upfile.append("name", e.target.files[0].name);
-      upfile.append("file", e.target.files[0]);
+      upfile.append("upfile", e.target.files[0]);
       const response = await axios.post(
         "http://localhost:3000/admin/uploadfile",
         upfile
       );
-      console.log("response", response);
+      this.logo = response.data.url
+      console.log("this.logo", this.logo);
       // this.logo = response.data.url;
     },
   },
@@ -121,5 +123,8 @@ h3 {
 }
 .mr-30 {
   margin-right: 30px;
+}
+.w-100{
+  width: 100%;
 }
 </style>

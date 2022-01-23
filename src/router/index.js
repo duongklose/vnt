@@ -10,6 +10,7 @@ import Trip from "../views/home/Trips.vue"
 import NewTrip from "../views/home/NewTrip.vue"
 import DetailTrip from "../views/home/DetailTrip.vue"
 import Review from "../views/home/Review.vue"
+import MergeTrip from "../views/home/MergeTrip.vue"
 
 const routes = [
   //================================================================
@@ -34,6 +35,11 @@ const routes = [
     path: "/trips",
     name: "Trip",
     component: Trip
+  },
+  {
+    path: "/mergetrip",
+    name: "MergeTrip",
+    component: MergeTrip
   },
   {
     path: "/newtrip",
