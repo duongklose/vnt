@@ -8,6 +8,8 @@ import Dashboard from "../views/home/Dashboard.vue"
 import Vehicle from "../views/home/Vehicles.vue"
 import Trip from "../views/home/Trips.vue"
 import NewTrip from "../views/home/NewTrip.vue"
+import DetailTrip from "../views/home/DetailTrip.vue"
+import Review from "../views/home/Review.vue"
 
 const routes = [
   //================================================================
@@ -38,17 +40,27 @@ const routes = [
     name: "NewTrip",
     component: NewTrip
   },
+  {
+    path: "/detailtrip",
+    name: "DetailTrip",
+    component: DetailTrip
+  },
+  {
+    path: "/review",
+    name: "Review",
+    component: Review
+  },
   //================================================================
   //Route for admin
   //================================================================
   {
     path: "/admin",
-    name: "Admin",
+    name: "DashboardAdmin",
     component: DashboardAdmin
   },
   {
     path: "/admin/dashboard",
-    name: "Dashboard",
+    name: "DashboardAdmin",
     component: DashboardAdmin
   },
   {

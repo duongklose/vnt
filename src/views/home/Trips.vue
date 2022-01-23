@@ -1,14 +1,8 @@
 <template>
   <div class="trips">
     <div class="table-list">
-      <h2 v-if="!isAddNew">Quản lý chuyến đi</h2>
-      <div v-if="isAddNew">
-        <FormTrip />
-      </div>
-      <button v-else class="btn btn-primary" @click="gotoNewTrip">
-        Thêm mới
-      </button>
-      <h2 v-if="isAddNew">Danh sách chuyến đi sắp tới</h2>
+      <h2>Danh sách chuyến đi sắp tới</h2>
+      <button class="btn btn-primary" @click="gotoNewTrip">Thêm mới</button>
       <table class="table table-hover mt-20">
         <thead>
           <tr>
@@ -30,8 +24,8 @@
             <td class="center">{{ trip.license_plate }}</td>
             <td class="center">{{ trip.price }}</td>
             <td class="center">
-              <button class="btn btn-primary action-button">Xem</button>
-              <button class="btn btn-danger action-button">Hoãn</button>
+              <button class="btn btn-primary action-button" @click="gotoDetailTrip(trip.id)">Xem</button>
+              <button class="btn btn-danger action-button" @click="stopTrip(trip.id)">Hoãn</button>
             </td>
           </tr>
         </tbody>
@@ -39,31 +33,59 @@
     </div>
   </div>
   <div class="trips">
-    <h2>Thông tin chuyến đi</h2>
+    <h2>Lịch sử các chuyến đã đi</h2>
     <div>
-      
+      <table class="table table-hover mt-20">
+        <thead>
+          <tr>
+            <th scope="col" class="center">STT</th>
+            <th scope="col" class="center">Tuyến đường</th>
+            <th scope="col" class="center">Thời gian</th>
+            <th scope="col" class="center">Biển số xe</th>
+            <th scope="col" class="center">Giá vé</th>
+            <th scope="col" class="center">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(trip, index) in done_trips" :key="index">
+            <td class="center">{{ index + 1 }}</td>
+            <td class="center">
+              {{ trip.start_province }} - {{ trip.end_province }}
+            </td>
+            <td class="center">{{ trip.start_time }} - {{ trip.end_time }}</td>
+            <td class="center">{{ trip.license_plate }}</td>
+            <td class="center">{{ trip.price }}</td>
+            <td class="center">
+              <button class="btn btn-primary action-button">Xem</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapMutations, mapActions } from "vuex";
-import FormTrip from "../../components/FormTrip.vue";
 
 export default {
-  components: {
-    FormTrip,
-  },
-  computed: mapGetters(["isAddNew", "id_transportation", "trips"]),
+  components: {},
+  computed: mapGetters(["trips", "done_trips"]),
   created() {
-    this.getTransportationTrips(this.id_transportation);
+    this.getTrips(JSON.parse(localStorage.getItem('user')).id_transportation);
+    this.getDoneTrips(JSON.parse(localStorage.getItem('user')).id_transportation)
   },
   methods: {
-    ...mapMutations(["TOGGLE_ISADDNEW"]),
-    ...mapActions(["getTransportationTrips"]),
-    gotoNewTrip(){
-      this.$router.push("NewTrip")
-    }
+    ...mapMutations([""]),
+    ...mapActions(["getTrips", "getDoneTrips", "stopTrip", "DetailTrip", "getTripByID"]),
+    gotoNewTrip() {
+      this.$router.push("NewTrip");
+    },
+    gotoDetailTrip(idTrip){
+      console.log("idTrip", idTrip)
+        this.getTripByID(idTrip);
+        this.$router.push("DetailTrip");
+    },
   },
 };
 </script>

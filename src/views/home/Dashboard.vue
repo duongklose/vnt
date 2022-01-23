@@ -3,12 +3,12 @@
     <div class="info-left">
       <img class="avatar" src="../../assets/logo.png" />
       <div class="info-text">
-        <div class="name-transportation">Tên nhà xe</div>
-        <div class="description">Mô tả của nhà xe</div>
+        <div class="name-transportation">{{this.transportation.name}}</div>
+        <div class="description">{{this.transportation.description}}</div>
       </div>
     </div>
     <div class="rate_point">
-      <span>Điểm đánh giá: 5.0</span>
+      <span>Điểm đánh giá: {{this.transportation.rate_point}}</span>
       <i class="bi bi-star-fill"></i>
     </div>
   </div>
@@ -70,7 +70,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  computed: mapGetters([]),
+  computed: mapGetters(["transportation"]),
   created() {
     this.getAllTypeVehicle();
   },

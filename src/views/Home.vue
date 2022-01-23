@@ -20,6 +20,12 @@
           <p>Quản lý chuyến đi</p>
         </div>
       </router-link>
+      <router-link to="/review">
+        <div class="sidebar-item">
+          <i class="bi bi-star"></i>
+          <p>Khách hàng đánh giá</p>
+        </div>
+      </router-link>
     </div>
   </div>
   <div class="content">
@@ -29,24 +35,15 @@
 
 <script>
 import Navbar from "../components/Navbar.vue";
-// import { useCookies } from "vue3-cookies";
-// import routes from "../router"
-
+import { mapActions } from "vuex";
 export default {
   components: { Navbar },
   created(){
-    
-  }
-  // setup() {
-  //   const { cookies } = useCookies();
-  //   const route = routes();
-  //   return { cookies, route };
-  // },
-  // beforeCreate: function () {
-  //   if (!this.$cookies.exists()) {
-  //     this.$route.push('/home')
-  //   }
-  // },
+    this.getTransportation(JSON.parse(localStorage.getItem("user")).id_transportation)
+  },
+  methods: {
+    ...mapActions(["getTransportation"]),
+  },
 };
 </script>
 

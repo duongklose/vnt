@@ -44,7 +44,7 @@ export default {
   },
   computed: mapGetters(["isAddNew", "vehicles", "id_transportation"]),
   created(){
-    this.getTransportationVehicles(this.id_transportation);
+    this.getTransportationVehicles(JSON.parse(localStorage.getItem('user')).id_transportation);
     this.getAllVehicleType();
   },
   methods: {

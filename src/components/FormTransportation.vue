@@ -36,6 +36,10 @@
       ></textarea>
     </div>
     <div class="form-group field">
+      <label for="logo">Logo</label>
+      <input type="file" name="upfile" @change="uploadImage($event)" required/>
+    </div>
+    <div class="form-group field">
       <div class="group-button">
         <button type="submit" class="btn btn-primary mr-30">Thêm</button>
         <button
@@ -52,6 +56,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
+import axios from "axios";
 
 export default {
   data() {
@@ -59,6 +64,7 @@ export default {
       name: "",
       phone: "",
       description: "",
+      logo: null,
     };
   },
 
@@ -76,6 +82,17 @@ export default {
       this.name = "";
       this.phone = "";
       this.description = "";
+    },
+    async uploadImage(e) {
+      let upfile = new FormData();
+      upfile.append("name", e.target.files[0].name);
+      upfile.append("file", e.target.files[0]);
+      const response = await axios.post(
+        "http://localhost:3000/admin/uploadfile",
+        upfile
+      );
+      console.log("response", response);
+      // this.logo = response.data.url;
     },
   },
 };
