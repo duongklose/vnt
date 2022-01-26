@@ -129,6 +129,7 @@ const actions = {
     async getReviews({ commit }, id_transportation) {
         try {
             const response = await HomeServices.getReviews(id_transportation)
+            console.log("ress", response)
             commit("SET_REVIEWS", response.data.reviews)
         } catch (error) {
             console.log(error.response)

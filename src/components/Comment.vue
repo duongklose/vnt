@@ -3,7 +3,7 @@
     <div class="col-2"></div>
     <div class="col-8">
       <div class="comment">
-        <img class="avatar" src="../assets/default-avatar.png" />
+        <img class="avatar" :src="'http://localhost:3000/' + review.avatar" />
         <div class="info-text">
           <div class="first">
             <div class="name">{{ review.name }}</div>
