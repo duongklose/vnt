@@ -12,7 +12,7 @@ const state = {
     end_stations: [],
     reviews: [],
     transportation: {},
-    list_merge_trip: []
+    list_merge_trip: [],
 }
 
 const getters = {
@@ -27,7 +27,7 @@ const getters = {
     end_stations: state => state.end_stations,
     reviews: state => state.reviews,
     transportation: state => state.transportation,
-    list_merge_trip: state => state.list_merge_trip
+    list_merge_trip: state => state.list_merge_trip,
 }
 
 const actions = {
@@ -170,7 +170,8 @@ const actions = {
     },
     async mergeTrip() {
         try {
-            const response = await HomeServices.mergeTrip(state.list_merge_trip)
+            var myJSON = JSON.stringify(state.list_merge_trip);
+            const response = await HomeServices.mergeTrip(myJSON)
             console.log("res", response)
         } catch (error) {
             console.log(error.response)
@@ -209,8 +210,7 @@ const mutations = {
         state.trips.push(trip)
     },
     ADD_MERGE_TRIP(state, id){
-        state.list_merge_trip.push({id: id})
-        console.log("list", state.list_merge_trip)
+        state.list_merge_trip.push(id)
     },
     ADD_VEHICLE(state, vehicle) {
         state.vehicles.push(vehicle)
@@ -266,12 +266,14 @@ const mutations = {
         }
         console.log("end station", state.end_stations)
     },
+
     SET_START_STATIONS(state, stations) {
         state.start_stations.length = 0
         for (var i = 0; i < stations.length; i++) {
             state.start_stations.push(stations[i])
         }
     },
+
     SET_REVIEWS(state, reviews) {
         state.reviews.length = 0
         for (var i = 0; i < reviews.length; i++) {

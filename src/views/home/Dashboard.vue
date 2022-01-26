@@ -1,7 +1,7 @@
 <template>
   <div class="info">
     <div class="info-left">
-      <img class="avatar" src="../../assets/logo.png" />
+      <img class="avatar" :src="'http://localhost:3000/' + this.transportation.logo" />
       <div class="info-text">
         <div class="name-transportation">{{this.transportation.name}}</div>
         <div class="description">{{this.transportation.description}}</div>
@@ -26,7 +26,7 @@
             <div class="col-md-7">
               <div class="pt-18">
                 <h5 class="card-title">Doanh thu</h5>
-                <p class="number">0</p>
+                <p class="number" style="margin-top: 32px; font-size: 30px;">18.000.000</p>
               </div>
             </div>
           </div>
@@ -41,7 +41,7 @@
             <div class="col-md-7">
               <div class="pt-18">
                 <h5 class="card-title">Số chuyến đã đi</h5>
-                <p class="number">0</p>
+                <p class="number">3</p>
               </div>
             </div>
           </div>
@@ -56,7 +56,7 @@
             <div class="col-md-7">
               <div class="pt-18">
                 <h5 class="card-title">Vé bán được</h5>
-                <p class="number">0</p>
+                <p class="number">90</p>
               </div>
             </div>
           </div>

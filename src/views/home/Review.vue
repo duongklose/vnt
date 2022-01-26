@@ -1,7 +1,7 @@
 <template>
   <div class="info">
     <div class="info-left">
-      <img class="avatar" src="../../assets/logo.png" />
+      <img class="avatar" :src="'http://localhost:3000/' + this.transportation.logo" />
       <div class="info-text">
         <div class="name-transportation">{{this.transportation.name}}</div>
         <div class="description">{{this.transportation.description}}</div>
@@ -26,13 +26,14 @@ import Comment from "../../components/Comment.vue";
 
 export default {
   components: { Comment },
-  computed: mapGetters(["reviews", "transportation"]),
+  computed: mapGetters(["reviews", "transportation", "logo"]),
   created() {
     this.getReviews(JSON.parse(localStorage.getItem("user")).id_transportation);
+    this.getTransportationLogo(6)
   },
   methods: {
     ...mapMutations([]),
-    ...mapActions(["getReviews"]),
+    ...mapActions(["getReviews", "getTransportationLogo"]),
   },
 };
 </script>

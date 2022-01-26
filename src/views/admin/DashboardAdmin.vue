@@ -43,7 +43,7 @@
             <div class="col-md-7">
               <div class="pt-18">
                 <h5 class="card-title">Vé đặt trong tháng</h5>
-                <p class="number">0</p>
+                <p class="number">5</p>
               </div>
             </div>
           </div>
@@ -69,11 +69,14 @@ export default {
 </script>
 
 <style scoped>
+.dashboard{
+  margin-top: 65px;
+}
 .statistic{
   background-color: #fff;
   width: 99%;
   padding: 10px;
-  margin-top: 20px;
+  margin-top: 58px;
 }
 .statistic-card {
   display: flex;

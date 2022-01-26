@@ -3,7 +3,7 @@
     <div class="col-2"></div>
     <div class="col-8">
       <div class="comment">
-        <img class="avatar" src="../assets/logo.png" />
+        <img class="avatar" src="../assets/default-avatar.png" />
         <div class="info-text">
           <div class="first">
             <div class="name">{{ review.name }}</div>

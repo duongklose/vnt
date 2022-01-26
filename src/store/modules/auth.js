@@ -46,6 +46,7 @@ const actions = {
             if (response.status == 200) {
                 if (JSON.parse(localStorage.getItem('user')).role == 0) {
                     commit("ADMIN_LOGIN_SUCCESS")
+                    // this.$router.push("DashboardAdmin");
                 } else {
                     // commit("SET_ID_TRANSPORTATION", response.data.user.id_transportation)
                     commit("TRANSPORTATION_LOGIN_SUCCESS")

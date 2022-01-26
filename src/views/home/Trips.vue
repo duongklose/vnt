@@ -44,7 +44,7 @@
             <th scope="col" class="center">Thời gian</th>
             <th scope="col" class="center">Biển số xe</th>
             <th scope="col" class="center">Giá vé</th>
-            <th scope="col" class="center">Thao tác</th>
+            <!-- <th scope="col" class="center">Thao tác</th> -->
           </tr>
         </thead>
         <tbody>
@@ -56,9 +56,9 @@
             <td class="center">{{ trip.start_time }} - {{ trip.end_time }}</td>
             <td class="center">{{ trip.license_plate }}</td>
             <td class="center">{{ trip.price }}</td>
-            <td class="center">
+            <!-- <td class="center">
               <button class="btn btn-primary action-button">Xem</button>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>

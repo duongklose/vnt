@@ -32,21 +32,26 @@ export default {
     getReviews(idTransportation){
         return Api().get('/getReviews?idTransportation=' + idTransportation)
     },
+    getTransportation(idTransportation){
+        return Api().get('/getTransportation?idTransportation='+ idTransportation)
+    },
+    getTransportationVehicles(idTransportation){
+        return Api().get('/getTransportationVehicles?idTransportation='+ idTransportation)
+    },
     getTripByID(idTrip){
         return Api().get('/getTripByID?idTrip='+ idTrip)
     },
     getTrips(idTransportation){
         return Api().get('/getTrips?idTransportation='+ idTransportation)
     },
-    getTransportationVehicles(idTransportation){
-        return Api().get('/getTransportationVehicles?idTransportation='+ idTransportation)
-    },
-    getTransportation(idTransportation){
-        return Api().get('/getTransportation?idTransportation='+ idTransportation)
-    },
     mergeTrip(list_merge_trip){
+        console.log(list_merge_trip)
         return Api().post('/mergeTrip', {list: JSON.stringify(list_merge_trip)})
+        // var test = {id: 1}
+        // console.log("test", test)
+        // return Api().post('/mergeTrip', test)
     },
+
     returnComment(comment){
         return Api().post('/returnComment', comment)
     },

@@ -40,7 +40,7 @@ export default {
   width: 280px;
   height: 100vh;
   text-align: left;
-  margin-top: 56px;
+  margin-top: 0px;
 }
 .sidebar-item {
   height: 50px;
