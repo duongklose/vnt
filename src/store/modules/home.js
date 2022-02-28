@@ -75,6 +75,15 @@ const actions = {
             console.log(error.response)
         }
     },
+    async endTrip({ commit }, idTrip) {
+        try {
+            const response = await HomeServices.endTrip(idTrip)
+            console.log(response)
+            commit("END_TRIP", idTrip)
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
     async getAllProvince({ commit }) {
         try {
             const response = await HomeServices.getAllProvince()
@@ -190,6 +199,15 @@ const actions = {
             console.log(error.response);
         }
     },
+    async startTrip({ commit }, idTrip) {
+        try {
+            const response = await HomeServices.startTrip(idTrip)
+            console.log(response)
+            commit("START_TRIP", idTrip)
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
     async stopTrip({ commit }, idTrip) {
         try {
             var notification = {
@@ -221,6 +239,11 @@ const mutations = {
     },
     DELETE_VEHICLE(state, phone) {
         state.vehicles = state.vehicles.filter(vehicle => vehicle.phone !== phone)
+    },
+    END_TRIP(state, id) {
+        state.done_trips.push(state.trips.filter(trip => trip.id == id)[0])
+        state.trips = state.trips.filter(trip => trip.id !== id)
+        state.trips.filter(trip => trip.id == id)[0].state = 2
     },
     REMOVE_MERGE_TRIP(state, id){
         for( var i = 0; i < state.list_merge_trip.length; i++){ 
@@ -313,7 +336,6 @@ const mutations = {
             data[i].end_time = time[3] + ":" + time[4] + " " + time[2] + "/" + time[1] + "/" + time[0];
         }
         state.trip = data[0]
-        console.log("trip", state.trip)
     },
     SET_TRIPS(state, data) {
         //xu ly dinh dang ngay thang
@@ -327,6 +349,9 @@ const mutations = {
     },
     SET_VEHICLES(state, data) {
         state.vehicles = data
+    },
+    START_TRIP(state, id) {
+        state.trips.filter(trip => trip.id == id)[0].state = 1
     },
     STOP_TRIP(state, id) {
         state.trips = state.trips.filter(trip => trip.id !== id)

@@ -11,6 +11,7 @@
               <th scope="col" class="center">Thời gian</th>
               <th scope="col" class="center">Biển số xe</th>
               <th scope="col" class="center">Giá vé</th>
+              <th scope="col" class="center">Vé đã đặt</th>
               <th scope="col" class="center">Chọn</th>
             </tr>
           </thead>
@@ -25,6 +26,7 @@
               </td>
               <td class="center">{{ trip.license_plate }}</td>
               <td class="center">{{ trip.price }}</td>
+              <td class="center">27/40</td>
               <td class="center">
                 <input @change="chooseTrip(trip.id)" type="checkbox" name="idtrip"/>
               </td>

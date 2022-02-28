@@ -14,6 +14,9 @@ export default {
     deleteVehicle(phone){
         return Api().delete('deleteVehicle?phone=' + phone)
     },
+    endTrip(idTrip){
+        return Api().post('/endTrip?idTrip='+ idTrip)
+    },
     getAllProvince(){
         return Api().get('/getAllProvince')
     },
@@ -54,6 +57,9 @@ export default {
 
     returnComment(comment){
         return Api().post('/returnComment', comment)
+    },
+    startTrip(idTrip){
+        return Api().post('/startTrip?idTrip='+ idTrip)
     },
     stopTrip(idTrip, notification){
         return Api().post('/stopTrip?idTrip='+ idTrip, notification)

@@ -10,10 +10,10 @@
       <table class="table table-hover mt-20">
         <thead>
           <tr>
-            <th scope="col">Tên nhà xe</th>
-            <th scope="col">Số điện thoại</th>
-            <th scope="col">Điểm đánh giá</th>
-            <th scope="col">Thao tác</th>
+            <th class="center-vertical" scope="col">Tên nhà xe</th>
+            <th class="center-vertical" scope="col">Số điện thoại</th>
+            <th class="center-vertical" scope="col">Điểm đánh giá</th>
+            <th class="center-vertical" scope="col">Thao tác</th>
           </tr>
         </thead>
         <tbody>
@@ -21,13 +21,19 @@
             v-for="transportation in transportations"
             :key="transportation.phone"
           >
-            <td class="center-vertical">{{ transportation.name }}</td>
+            <td class="">{{ transportation.name }}</td>
             <td class="center-vertical">{{ transportation.phone }}</td>
             <td class="center-vertical">{{ transportation.rate_point }}</td>
             <td class="center-vertical">
               <button
+                @click="gotoNewAccountTransportation"
+                class="btn btn-success"
+              >
+                Thêm tài khoản
+              </button>
+              <button
                 @click="deleteTransportation(transportation.phone)"
-                class="btn btn-danger"
+                class="btn btn-danger action-button"
               >
                 Xóa
               </button>
@@ -54,7 +60,10 @@ export default {
   },
   methods: {
     ...mapActions(["getTransportations", "deleteTransportation"]),
-    ...mapMutations(["TOGGLE_ISADDNEW"])
+    ...mapMutations(["TOGGLE_ISADDNEW"]),
+    gotoNewAccountTransportation() {
+      this.$router.push("NewAccountTransportation");
+    },
   },
 };
 </script>
@@ -74,6 +83,7 @@ h2 {
 
 .center-vertical {
   vertical-align: middle;
+  text-align: center;
 }
 
 .table-list {
@@ -84,5 +94,9 @@ h2 {
 
 .mt-20 {
   margin-top: 20px;
+}
+
+.action-button{
+  margin-left: 5px;
 }
 </style>

@@ -50,7 +50,7 @@ export default {
 <style scoped>
 .side-bar {
   position: fixed;
-  width: 280px;
+  width: 250px;
   height: 100vh;
   text-align: left;
   margin-top: 56px;
@@ -72,8 +72,9 @@ export default {
 }
 
 .sidebar-item i {
-  padding-left: 20px;
-  font-size: 30px;
+  padding-left: 10px;
+  font-size: 25px;
+  margin-top: 5px;
 }
 
 .sidebar-item:hover {
@@ -82,11 +83,10 @@ export default {
 
 .sidebar-menu {
   width: auto !important;
-  padding-right: 1rem;
   margin-top: 40px;
 }
 .content {
-  padding-left: 280px;
+  padding-left: 250px;
   padding-top: 56px;
 }
 

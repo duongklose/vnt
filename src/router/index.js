@@ -11,6 +11,7 @@ import NewTrip from "../views/home/NewTrip.vue"
 import DetailTrip from "../views/home/DetailTrip.vue"
 import Review from "../views/home/Review.vue"
 import MergeTrip from "../views/home/MergeTrip.vue"
+import NewAccountTransportation from "../views/admin/NewAccountTransportation.vue"
 
 const routes = [
   //================================================================
@@ -79,22 +80,11 @@ const routes = [
     name: "User",
     component: User
   },
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  //   children :[
-  //     { 
-  //       path: 'user/:userId',
-  //       component: () =>
-  //       import("../components/User.vue"),
-  //     }
-  //   ]
-  // },
+  {
+    path: "/admin/newAccountTransportation",
+    name: "NewAccountTransportation",
+    component: NewAccountTransportation
+  },
   {
     path: "/login",
     name: "Login",
