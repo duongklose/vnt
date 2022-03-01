@@ -26,7 +26,7 @@
             <td class="center-vertical">{{ transportation.rate_point }}</td>
             <td class="center-vertical">
               <button
-                @click="gotoNewAccountTransportation"
+                @click="gotoNewAccountTransportation(transportation.id)"
                 class="btn btn-success"
               >
                 Thêm tài khoản
@@ -60,8 +60,9 @@ export default {
   },
   methods: {
     ...mapActions(["getTransportations", "deleteTransportation"]),
-    ...mapMutations(["TOGGLE_ISADDNEW"]),
-    gotoNewAccountTransportation() {
+    ...mapMutations(["TOGGLE_ISADDNEW", "SET_ID_CHOSEN_TRANSPORTATION"]),
+    gotoNewAccountTransportation(id) {
+      this.SET_ID_CHOSEN_TRANSPORTATION(id)
       this.$router.push("NewAccountTransportation");
     },
   },

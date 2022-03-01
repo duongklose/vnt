@@ -1,6 +1,9 @@
 import Api from './index'
 
 export default {
+    addAccountTransportation(newAccountTransportation){
+        return Api().post('admin/addAccountTransportation', newAccountTransportation)
+    },
     addAdmin(){
         return Api().post('users/addAdmin')
     },

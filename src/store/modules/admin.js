@@ -10,20 +10,40 @@ const state = {
     users:[],
     transportations:[],
     isAddNew: false, 
-    phoneIsRegited: false
+    phoneIsRegited: false,
+    usernameISRegisted: false,
+    addAccountSuccess: false,
+    idChosenTransportation: 0
 }
 
 const getters = {
+    addAccountSuccess: state => state.addAccountSuccess,
     blocked: state => state.blocked,
     numOfUser: state => state.info.numOfUser,
     numOfTransportation: state => state.info.numOfTransportation,
     transportations: state => state.transportations,
+    idChosenTransportation: state => state.idChosenTransportation,
     isAddNew: state => state.isAddNew,
     phoneIsRegited: state => state.phoneIsRegited,
+    usernameISRegisted: state => state.usernameISRegisted,
     users: state => state.users
 }
 
 const actions = {
+    async addAccountTransportation({commit}, newAccountTransportation){
+        try {
+            console.log('newAccountTransportation ', newAccountTransportation)
+            const response = await AdminServices.addAccountTransportation(newAccountTransportation)
+            console.log('response ' , response)
+            if(response.status == 200){
+                commit("USERNAME_IS_REGISTED")
+            }else if(response.status == 201){
+                commit("ADD_ACCOUNT_SUCCESS")
+            }
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
     async addTransportation({commit}, newTransportation){
         try {
             console.log('newTransportation ', newTransportation)
@@ -111,6 +131,10 @@ const actions = {
 }
 
 const mutations = {
+    ADD_ACCOUNT_SUCCESS(state) {
+        state.addAccountSuccess = true
+        state.usernameISRegisted = false
+    },
     ADD_TRANSPORTATION(state, transportation) {
         state.transportations.push(transportation)
     },
@@ -122,6 +146,13 @@ const mutations = {
     },
     DO_NOTHING(){
         
+    },
+    SET_ID_CHOSEN_TRANSPORTATION(state, id){
+        state.idChosenTransportation = id
+    },
+    SET_NO_ERR(){
+        state.usernameISRegisted = false
+        state.addAccountSuccess = false
     },
     SET_NUM_OF_USER(state, numOfUser){
         state.info.numOfUser = numOfUser
@@ -143,6 +174,10 @@ const mutations = {
     },
     PHONE_IS_NOT_REGISTED(state){
         state.phoneIsRegited = false
+    },
+    USERNAME_IS_REGISTED(state) {
+        state.usernameISRegisted = true
+        state.addAccountSuccess = false
     }
 }
 

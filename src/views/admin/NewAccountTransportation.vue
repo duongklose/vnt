@@ -2,6 +2,23 @@
   <div class="newaccount">
     <form @submit="onSubmit">
       <h3>Thêm tài khoản mới</h3>
+      <div v-if="err" class="alert alert-danger" role="alert">
+        Mật khẩu không trùng khớp
+      </div>
+      <div
+        v-if="this.usernameISRegisted"
+        class="alert alert-danger"
+        role="alert"
+      >
+        Tên đăng nhập đã tồn tại
+      </div>
+      <div
+        v-if="this.addAccountSuccess"
+        class="alert alert-success"
+        role="alert"
+      >
+        Thêm thành công!
+      </div>
       <div class="form-group field">
         <label for="username">Username</label>
         <input
@@ -45,28 +62,39 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
+      err: false,
       username: "",
       password: "",
-      repassword: ""
+      repassword: "",
     };
   },
-  computed: mapGetters([]),
+  created() {
+    this.err = false
+    this.SET_NO_ERR();
+  },
+  computed: mapGetters([
+    "addAccountSuccess",
+    "usernameISRegisted",
+    "idChosenTransportation",
+  ]),
   methods: {
-    ...mapMutations(["addAccountTransportation"]),
-    ...mapActions([ ]),
+    ...mapMutations(["SET_NO_ERR"]),
+    ...mapActions(["addAccountTransportation"]),
     onSubmit(event) {
       event.preventDefault();
-    //   if(this.password != this.repassword){
-
-    //   }else{
-
-    //   }
+      if (this.password != this.repassword) {
+        this.err = true;
+        this.usernameISRegisted = false
+      } else {
+        this.err = false;
         this.addAccountTransportation({
-            username: this.username,
-            password: this.password
+          username: this.username,
+          password: this.password,
+          id_transportation: this.idChosenTransportation,
         });
-        //check trung username
-        this.username = ""
+        this.password = "";
+        this.repassword = "";
+      }
     },
   },
 };
