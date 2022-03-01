@@ -16,17 +16,22 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(trip, index) in trips" :key="index">
+            <tr v-for="(trip, index) in trips" :key="index"
+              :class="{
+              'bg-green' : checkReadyTrip(trip.start_time, trip.booked_ticket, trip.max),
+              'bg-red': checkWarningTrip(trip.start_time, trip.booked_ticket, trip.max)
+            }"
+            >
               <td class="center">{{ index + 1 }}</td>
               <td class="center">
                 {{ trip.start_province }} - {{ trip.end_province }}
               </td>
               <td class="center">
-                {{ trip.start_time }} - {{ trip.end_time }}
+                {{ trip.start_time.slice(0,11) }} - {{ trip.end_time.slice(0,11) }}
               </td>
               <td class="center">{{ trip.license_plate }}</td>
               <td class="center">{{ trip.price }}</td>
-              <td class="center">27/40</td>
+              <td class="center">{{ trip.booked_ticket }}/{{ trip.max }}</td>
               <td class="center">
                 <input @change="chooseTrip(trip.id)" type="checkbox" name="idtrip"/>
               </td>
@@ -61,7 +66,36 @@ export default {
         }else{
             this.REMOVE_MERGE_TRIP(idTrip)
         }
-        
+    },
+    checkReadyTrip(start_time, booked_ticket, max_ticket){
+      var y = parseInt(start_time.slice(12))
+      var m = parseInt(start_time.slice(9,11)) - 1
+      var d = parseInt(start_time.slice(6,8))
+      var h = parseInt(start_time.slice(0,2))
+      var min = parseInt(start_time.slice(3,5))
+      var s = 0
+      var s_time = new Date(y, m, d, h, min, s)
+      var now = Date.now()
+      if(booked_ticket >= max_ticket/2 && ((s_time.getTime() - now) < 24*60*60*1000)){
+        return true
+      }else{
+        return false
+      }
+    },
+    checkWarningTrip(start_time, booked_ticket, max_ticket){
+      var y = parseInt(start_time.slice(12))
+      var m = parseInt(start_time.slice(9,11)) - 1
+      var d = parseInt(start_time.slice(6,8))
+      var h = parseInt(start_time.slice(0,2))
+      var min = parseInt(start_time.slice(3,5))
+      var s = 0
+      var s_time = new Date(y, m, d, h, min, s)
+      var now = Date.now()
+      if(booked_ticket < max_ticket/2 && ((s_time.getTime() - now) < 24*60*60*1000)){
+        return true
+      }else{
+        return false
+      }
     }
   },
 };
@@ -97,5 +131,11 @@ h2 {
 .action-button {
   width: 65px;
   margin-left: 5px;
+}
+.bg-red{
+  background-color: #ffebcd;
+}
+.bg-green{
+  background-color: #90ee90;
 }
 </style>
