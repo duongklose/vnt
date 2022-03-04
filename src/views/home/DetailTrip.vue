@@ -90,11 +90,10 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  components: {},
+  components: { },
   computed: mapGetters(["trip", "tickets"]),
   methods: {
     ...mapActions([]),
-
   },
 };
 </script>

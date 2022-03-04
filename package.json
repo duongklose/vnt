@@ -16,6 +16,7 @@
     "vue": "^3.0.0",
     "vue-bootstrap-datetimepicker": "^5.0.1",
     "vue-excel-xlsx": "^1.2.2",
+    "vue-json-excel": "^0.3.0",
     "vue-router": "^4.0.0-0",
     "vue3-cookies": "^1.0.6",
     "vue3-date-time-picker": "^2.4.4",
