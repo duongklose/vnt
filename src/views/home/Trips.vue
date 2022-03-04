@@ -87,13 +87,14 @@ export default {
   },
   methods: {
     ...mapMutations([""]),
-    ...mapActions(["getTrips", "getDoneTrips", "stopTrip", "DetailTrip", "getTripByID", "startTrip", "endTrip"]),
+    ...mapActions(["getTrips", "getDoneTrips", "stopTrip", "DetailTrip", "getTripByID", "startTrip", "endTrip", "getTickets"]),
     gotoNewTrip() {
       this.$router.push("NewTrip");
     },
-    gotoDetailTrip(idTrip){
+    async gotoDetailTrip(idTrip){
       console.log("idTrip", idTrip)
-        this.getTripByID(idTrip);
+        await this.getTripByID(idTrip);
+        await this.getTickets(idTrip)
         this.$router.push("DetailTrip");
     },
     mergeTrip() {

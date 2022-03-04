@@ -35,6 +35,9 @@ export default {
     getReviews(idTransportation){
         return Api().get('/getReviews?idTransportation=' + idTransportation)
     },
+    getTickets(idTrip){
+        return Api().get('/getDetailTickets?idTrip=' + idTrip)
+    },
     getTransportation(idTransportation){
         return Api().get('/getTransportation?idTransportation='+ idTransportation)
     },

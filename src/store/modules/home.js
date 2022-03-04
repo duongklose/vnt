@@ -13,6 +13,7 @@ const state = {
     reviews: [],
     transportation: {},
     list_merge_trip: [],
+    tickets: []
 }
 
 const getters = {
@@ -28,6 +29,7 @@ const getters = {
     reviews: state => state.reviews,
     transportation: state => state.transportation,
     list_merge_trip: state => state.list_merge_trip,
+    tickets: state => state.tickets,
 }
 
 const actions = {
@@ -144,6 +146,16 @@ const actions = {
             console.log(error.response)
         }
     },
+    async getTickets({commit}, idTrip) {
+        try {
+            console.log('idTrip ', idTrip)
+            const response = await HomeServices.getTickets(idTrip)
+            console.log('response ', response)
+            commit("SET_TICKETS", response.data.tickets)
+        } catch (error) {
+            console.log(error.response)
+        }
+    },
     async getTripByID({ commit }, idTrip) {
         try {
             const response = await HomeServices.getTripByID(idTrip)
@@ -181,6 +193,7 @@ const actions = {
     async mergeTrip() {
         try {
             var myJSON = JSON.stringify(state.list_merge_trip);
+            console.log("mmmmmm", myJSON)
             const response = await HomeServices.mergeTrip(myJSON)
             console.log("res", response)
         } catch (error) {
@@ -321,6 +334,10 @@ const mutations = {
                 break
             }
         }
+    },
+
+    SET_TICKETS(state, data) {
+        state.tickets = data
     },
 
     SET_TRANSPORTATION(state, data) {
