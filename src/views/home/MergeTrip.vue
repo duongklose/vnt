@@ -2,7 +2,7 @@
   <div class="trips">
     <div class="table-list">
       <h2>Danh sách chuyến đi sắp tới</h2>
-        <button @click="mergeTrip()" class="btn btn-success" type="submit">Ghép</button>
+        <button @click="mtrip()" class="btn btn-success" type="submit">Ghép</button>
         <table class="table table-hover mt-20">
           <thead>
             <tr>
@@ -55,6 +55,10 @@ export default {
   methods: {
     ...mapMutations(["CLEAR_LIST_MERGE_TRIP", "ADD_MERGE_TRIP", "REMOVE_MERGE_TRIP"]),
     ...mapActions(["getTrips", "mergeTrip"]),
+    mtrip(){
+      this.mergeTrip();
+      this.$router.push("Trips");
+    },
     chooseTrip(idTrip){
         var ch = 0;
         for(var i =0; i<this.list_merge_trip.length; i++){

@@ -6,7 +6,7 @@ import Transportation from "../views/admin/Transportations.vue"
 import User from "../views/admin/Users.vue"
 import Dashboard from "../views/home/Dashboard.vue"
 import Vehicle from "../views/home/Vehicles.vue"
-import Trip from "../views/home/Trips.vue"
+import Trips from "../views/home/Trips.vue"
 import NewTrip from "../views/home/NewTrip.vue"
 import DetailTrip from "../views/home/DetailTrip.vue"
 import Review from "../views/home/Review.vue"
@@ -34,8 +34,8 @@ const routes = [
   },
   {
     path: "/trips",
-    name: "Trip",
-    component: Trip
+    name: "Trips",
+    component: Trips
   },
   {
     path: "/mergetrip",

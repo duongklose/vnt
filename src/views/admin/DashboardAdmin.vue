@@ -43,7 +43,7 @@
             <div class="col-md-7">
               <div class="pt-18">
                 <h5 class="card-title">Vé đặt trong tháng</h5>
-                <p class="number">5</p>
+                <p class="number">315</p>
               </div>
             </div>
           </div>
